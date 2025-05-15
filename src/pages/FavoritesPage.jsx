@@ -1,5 +1,6 @@
 // src/pages/FavoritesPage.jsx
 import React, { useEffect, useState } from 'react';
+import { getArtist } from '../services/spotify';
 import { useFavorites } from '../contexts/FavoritesContext';
 import { searchArtists, getAlbum } from '../services/spotify';
 import ArtistCard from '../components/ArtistCard';
@@ -12,22 +13,21 @@ export default function FavoritesPage() {
   const [tracks, setTracks] = useState([]);
 
   useEffect(() => {
-    // Cargamos artistas por ID
-    Promise.all(favoriteArtists.map(id => searchArtists(id + '*'))) // búsqueda aproximada
-      .then(results => setArtists(results.flat()));
-  }, [favoriteArtists]);
-
-  useEffect(() => {
-    // Debe existir un servicio getTrack o usar getAlbum para filtrar
-    Promise.all(
-      favoriteTracks.map(id =>
-        getAlbum(id.substring(0, id.indexOf('-'))) // asumiendo id de track tiene album-track?
-      )
-    ).then(() => {
-      // Para simplificar, omitimos detalle exacto
-      setTracks([]); 
+  if (favoriteArtists.length === 0) {
+    setArtists([]);
+    return;
+  }
+  // Carga cada artista por su ID real
+  Promise.all(favoriteArtists.map(id => getArtist(id)))
+    .then(dataArray => {
+      // dataArray es un array de objetos artista
+      setArtists(dataArray);
+    })
+    .catch(err => {
+      console.error('Error cargando favoritos:', err);
+      setArtists([]);
     });
-  }, [favoriteTracks]);
+}, [favoriteArtists]);
 
   return (
     <div style={{ padding: '2rem' }}>

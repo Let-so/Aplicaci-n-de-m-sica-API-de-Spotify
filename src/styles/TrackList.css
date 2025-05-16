@@ -1,0 +1,116 @@
+.tracklist {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tracklist-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  height: 36px;
+  color: var(--spotify-text-gray);
+  font-size: 14px;
+  text-align: left;
+}
+
+.tracklist-header th {
+  font-weight: 400;
+  padding: 0 16px;
+}
+
+.tracklist-header th:first-child {
+  width: 40px;
+  text-align: right;
+}
+
+.tracklist-row {
+  height: 56px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.tracklist-row:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.tracklist-row:hover .track-number {
+  display: none;
+}
+
+.tracklist-row:hover .track-play {
+  display: block;
+}
+
+.tracklist-row td {
+  padding: 0 16px;
+}
+
+.track-number-cell {
+  width: 40px;
+  text-align: right;
+  color: var(--spotify-text-gray);
+  position: relative;
+}
+
+.track-number {
+  display: block;
+}
+
+.track-play {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--spotify-white);
+  cursor: pointer;
+}
+
+.track-title-cell {
+  display: flex;
+  align-items: center;
+}
+
+.track-image-small {
+  width: 40px;
+  height: 40px;
+  margin-right: 16px;
+  object-fit: cover;
+}
+
+.track-title-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.track-title {
+  margin-bottom: 4px;
+}
+
+.track-artist-small {
+  font-size: 14px;
+  color: var(--spotify-text-gray);
+}
+
+.track-album {
+  color: var(--spotify-text-gray);
+}
+
+.track-date-added {
+  color: var(--spotify-text-gray);
+}
+
+.track-duration {
+  color: var(--spotify-text-gray);
+  text-align: right;
+}
+
+.track-options {
+  width: 40px;
+  text-align: center;
+  color: var(--spotify-text-gray);
+  opacity: 0;
+}
+
+.tracklist-row:hover .track-options {
+  opacity: 1;
+  cursor: pointer;
+}

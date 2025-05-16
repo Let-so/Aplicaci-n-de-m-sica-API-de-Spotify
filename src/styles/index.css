@@ -1,0 +1,71 @@
+:root {
+  /* Colores principales de Spotify */
+  --spotify-green: #1DB954;
+  --spotify-black: #191414;
+  --spotify-dark-gray: #121212;
+  --spotify-light-gray: #282828;
+  --spotify-white: #FFFFFF;
+  --spotify-text-gray: #B3B3B3;
+
+  /* Fuentes */
+  --font-primary: 'Gotham', 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--spotify-black);
+  color: var(--spotify-white);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+}
+
+a {
+  color: var(--spotify-white);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--spotify-green);
+}
+
+button {
+  background-color: var(--spotify-green);
+  color: var(--spotify-white);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: #1ed760;
+  transform: scale(1.05);
+}
+
+/* Scrollbar personalizado estilo Spotify */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5a5a5a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7c7c7c;
+}

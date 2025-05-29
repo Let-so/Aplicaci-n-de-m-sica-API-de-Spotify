@@ -3,6 +3,7 @@ import { searchArtists } from '../services/spotify';
 import { useAuth } from '../contexts/AuthContext';
 import ArtistCard from '../components/ArtistCard';
 import '../styles/SearchPage.css';
+import { Link } from 'react-router-dom';
 
 export default function SearchPage() {
   const { token } = useAuth();
@@ -29,7 +30,7 @@ export default function SearchPage() {
   if (!token) {
     return (
       <div className="search-page">
-        <p>🔒 Necesitas <a href="/login">loguearte</a> para buscar artistas.</p>
+        <p>🔒 Necesitas <Link to= "/login" >loguearte</Link> para buscar artistas.</p>
       </div>
     );
   }

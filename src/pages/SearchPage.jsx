@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { searchArtists } from '../services/spotify';
 import { useAuth } from '../contexts/AuthContext';
 import ArtistCard from '../components/ArtistCard';
+import '../styles/SearchPage.css';
 
 export default function SearchPage() {
   const { token } = useAuth();
@@ -27,38 +28,23 @@ export default function SearchPage() {
 
   if (!token) {
     return (
-      <div style={{ padding: '2rem' }}>
-        🔒 Necesitas <a href="/login">loguearte</a> para buscar artistas.
+      <div className="search-page">
+        <p>🔒 Necesitas <a href="/login">loguearte</a> para buscar artistas.</p>
       </div>
     );
   }
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>🔍 Búsqueda de artistas</h1>
+    <div className="search-page">
+      <h1>Explorar todo</h1>
 
-      <form onSubmit={handleSearch} style={{ margin: '1rem 0' }}>
+      <form onSubmit={handleSearch}>
         <input
           value={query}
           onChange={e => setQuery(e.target.value)}
-          placeholder="Escribe el nombre de un artista..."
-          style={{
-            padding: '0.5rem',
-            fontSize: '1rem',
-            width: '300px',
-            borderRadius: '4px',
-            border: '1px solid #ccc',
-          }}
+          placeholder="Artistas, canciones o podcasts"
         />
-        <button
-          type="submit"
-          style={{
-            marginLeft: '0.5rem',
-            padding: '0.5rem 1rem',
-            fontSize: '1rem',
-            cursor: 'pointer',
-          }}
-        >
+        <button type="submit">
           Buscar
         </button>
       </form>
@@ -66,11 +52,54 @@ export default function SearchPage() {
       {loading && <p>Cargando resultados…</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        {artists.map(artist => (
-          <ArtistCard key={artist.id} artist={artist} />
-        ))}
-      </div>
+      {!query && (
+        <div>
+          <h2>Explorar todo</h2>
+          <div className="category-grid">
+            <div className="category-card" style={{ backgroundColor: '#1E8954' }}>
+              <div className="category-title">Podcasts</div>
+            </div>
+            <div className="category-card" style={{ backgroundColor: '#477D95' }}>
+              <div className="category-title">Especialmente para ti</div>
+            </div>
+            <div className="category-card" style={{ backgroundColor: '#8D67AB' }}>
+              <div className="category-title">Listas de éxitos</div>
+            </div>
+            <div className="category-card" style={{ backgroundColor: '#E8115B' }}>
+              <div className="category-title">Novedades</div>
+            </div>
+            <div className="category-card" style={{ backgroundColor: '#7358FF' }}>
+              <div className="category-title">Descubrir</div>
+            </div>
+            <div className="category-card" style={{ backgroundColor: '#E13300' }}>
+              <div className="category-title">Latina</div>
+            </div>
+            <div className="category-card" style={{ backgroundColor: '#8C1932' }}>
+              <div className="category-title">Estado de ánimo</div>
+            </div>
+            <div className="category-card" style={{ backgroundColor: '#B49BC8' }}>
+              <div className="category-title">Pop</div>
+            </div>
+            <div className="category-card" style={{ backgroundColor: '#E91429' }}>
+              <div className="category-title">Flamenco</div>
+            </div>
+            <div className="category-card" style={{ backgroundColor: '#0D72ED' }}>
+              <div className="category-title">Relax</div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {artists.length > 0 && (
+        <div>
+          <h2>Resultados para "{query}"</h2>
+          <div className="artist-grid">
+            {artists.map(artist => (
+              <ArtistCard key={artist.id} artist={artist} />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
